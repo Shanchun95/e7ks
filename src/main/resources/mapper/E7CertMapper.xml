@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dashan.exam.mapper.E7CertMapper">
+  <resultMap id="BaseResultMap" type="com.dashan.exam.po.E7Cert">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="img" jdbcType="INTEGER" property="img" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="enter" jdbcType="VARCHAR" property="enter" />
+    <result column="point" jdbcType="VARCHAR" property="point" />
+    <result column="outline" jdbcType="VARCHAR" property="outline" />
+    <result column="exam" jdbcType="VARCHAR" property="exam" />
+    <result column="know" jdbcType="VARCHAR" property="know" />
+    <result column="cert_group" jdbcType="VARCHAR" property="certGroup" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, img, start_date, enter, point, outline, exam, know, cert_group
+  </sql>
+  <select id="selectByExample" parameterType="com.dashan.exam.po.E7CertExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from e7_cert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from e7_cert
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from e7_cert
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dashan.exam.po.E7CertExample">
+    delete from e7_cert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dashan.exam.po.E7Cert">
+    insert into e7_cert (id, name, img, 
+      start_date, enter, point, 
+      outline, exam, know, 
+      cert_group)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{img,jdbcType=INTEGER}, 
+      #{startDate,jdbcType=DATE}, #{enter,jdbcType=VARCHAR}, #{point,jdbcType=VARCHAR}, 
+      #{outline,jdbcType=VARCHAR}, #{exam,jdbcType=VARCHAR}, #{know,jdbcType=VARCHAR}, 
+      #{certGroup,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dashan.exam.po.E7Cert">
+    insert into e7_cert
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="enter != null">
+        enter,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="outline != null">
+        outline,
+      </if>
+      <if test="exam != null">
+        exam,
+      </if>
+      <if test="know != null">
+        know,
+      </if>
+      <if test="certGroup != null">
+        cert_group,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="enter != null">
+        #{enter,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="exam != null">
+        #{exam,jdbcType=VARCHAR},
+      </if>
+      <if test="know != null">
+        #{know,jdbcType=VARCHAR},
+      </if>
+      <if test="certGroup != null">
+        #{certGroup,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dashan.exam.po.E7CertExample" resultType="java.lang.Long">
+    select count(*) from e7_cert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update e7_cert
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=INTEGER},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=DATE},
+      </if>
+      <if test="record.enter != null">
+        enter = #{record.enter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.point != null">
+        point = #{record.point,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outline != null">
+        outline = #{record.outline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exam != null">
+        exam = #{record.exam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.know != null">
+        know = #{record.know,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certGroup != null">
+        cert_group = #{record.certGroup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update e7_cert
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=INTEGER},
+      start_date = #{record.startDate,jdbcType=DATE},
+      enter = #{record.enter,jdbcType=VARCHAR},
+      point = #{record.point,jdbcType=VARCHAR},
+      outline = #{record.outline,jdbcType=VARCHAR},
+      exam = #{record.exam,jdbcType=VARCHAR},
+      know = #{record.know,jdbcType=VARCHAR},
+      cert_group = #{record.certGroup,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dashan.exam.po.E7Cert">
+    update e7_cert
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=INTEGER},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=DATE},
+      </if>
+      <if test="enter != null">
+        enter = #{enter,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        outline = #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="exam != null">
+        exam = #{exam,jdbcType=VARCHAR},
+      </if>
+      <if test="know != null">
+        know = #{know,jdbcType=VARCHAR},
+      </if>
+      <if test="certGroup != null">
+        cert_group = #{certGroup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dashan.exam.po.E7Cert">
+    update e7_cert
+    set name = #{name,jdbcType=VARCHAR},
+      img = #{img,jdbcType=INTEGER},
+      start_date = #{startDate,jdbcType=DATE},
+      enter = #{enter,jdbcType=VARCHAR},
+      point = #{point,jdbcType=VARCHAR},
+      outline = #{outline,jdbcType=VARCHAR},
+      exam = #{exam,jdbcType=VARCHAR},
+      know = #{know,jdbcType=VARCHAR},
+      cert_group = #{certGroup,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
